@@ -17,6 +17,10 @@ function App() {
       <section className='cards'>
         <div>
           <BudgetCard name='Entertainment' amount={200} max={1000}></BudgetCard>
+          <BudgetCard name='Entertainment' amount={600} max={1000}></BudgetCard>
+          <BudgetCard name='Entertainment' amount={800} max={1000}></BudgetCard>
+          <BudgetCard name='Entertainment' amount={10000} max={1000}></BudgetCard>
+          <BudgetCard name='Entertainment' amount={10} max={1000} gray></BudgetCard>
         </div>
       </section>
     </Container>
