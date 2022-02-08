@@ -33,7 +33,7 @@ export default function BudgetCard({ name, amount, max, gray }) {
           <Button variant='outline-secondary' className='text-capitalize'>
             view expenses
           </Button>
-        </Stack>{' '}
+        </Stack>
       </Card.Body>
     </Card>
   );
