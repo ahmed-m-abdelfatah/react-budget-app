@@ -13,6 +13,7 @@ export default function useLocalStorage(key, defaultValue) {
   });
 
   //  update localStorage
+  // componentDidUpdate() {} -- for specified states
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
