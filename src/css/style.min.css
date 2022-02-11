@@ -1,2 +1,2 @@
-.cards>div{display:-ms-grid;display:grid;-ms-grid-columns:(minmax(300px, 1fr))[auto-fill];grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:1rem;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}
+.my-masonry-grid{display:-webkit-box;display:-ms-flexbox;display:flex;margin-left:-15px;width:auto}.my-masonry-grid .my-masonry-grid_column{padding-left:15px;background-clip:padding-box}.my-masonry-grid .my-masonry-grid_column>div{margin-bottom:15px}
 /*# sourceMappingURL=style.min.css.map */

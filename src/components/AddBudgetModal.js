@@ -4,10 +4,12 @@ import { useBudgets } from '../contexts/BudgetsContext';
 
 export default function AddBudgetModal({ show, handleClose }) {
   const nameRef = useRef();
+  console.log(nameRef);
   const maxRef = useRef();
   const { addBudget } = useBudgets();
+
   function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault(); // stop page loading
     addBudget({
       name: nameRef.current.value,
       max: parseFloat(maxRef.current.value),

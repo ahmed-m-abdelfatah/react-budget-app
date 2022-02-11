@@ -12,7 +12,7 @@ export default function BudgetCard({ name, amount, max, gray }) {
   return (
     <Card className={classNames.join(' ')}>
       <Card.Body>
-        <Card.Title className='d-flex justify-content-between align-items-baseline fw-normal mb-3'>
+        <Card.Title className='d-flex justify-content-between align-items-baseline fw-normal mb-3 flex-wrap text-break'>
           <div className='me-2'>{name}</div>
           <div className='d-flex align-items-baseline'>
             {currencyFormatter.format(amount)}
@@ -26,7 +26,7 @@ export default function BudgetCard({ name, amount, max, gray }) {
           max={max}
           now={amount}
         />
-        <Stack direction='horizontal' gap='2' className='mt-4'>
+        <Stack direction='horizontal' gap='2' className='mt-4 flex-wrap justify-content-end'>
           <Button variant='outline-primary' className='text-capitalize ms-auto'>
             add expense
           </Button>

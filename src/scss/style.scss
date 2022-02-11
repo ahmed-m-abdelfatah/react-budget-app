@@ -1,6 +1,27 @@
-.cards > div {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
-  align-items: flex-start;
+// .cards > div {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+//   @supports (grid-template-rows: masonry) {
+//     /* masonry code here */
+//     grid-template-rows: masonry;
+//     grid-template-columns: masonry;
+//   }
+//   gap: 1rem;
+//   align-items: flex-start;
+// }
+
+.my-masonry-grid {
+  $gutter: 15px;
+  display: flex;
+  margin-left: -$gutter;
+  width: auto;
+
+  .my-masonry-grid_column {
+    padding-left: $gutter;
+    background-clip: padding-box;
+
+    & > div {
+      margin-bottom: $gutter;
+    }
+  }
 }
