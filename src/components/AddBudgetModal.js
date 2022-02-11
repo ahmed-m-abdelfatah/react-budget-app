@@ -4,7 +4,7 @@ import { useBudgets } from '../contexts/BudgetsContext';
 
 export default function AddBudgetModal({ show, handleClose }) {
   const nameRef = useRef();
-  console.log(nameRef);
+  // console.log(nameRef);
   const maxRef = useRef();
   const { addBudget } = useBudgets();
 

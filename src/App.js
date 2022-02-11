@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Container, Stack, Button } from 'react-bootstrap';
 import Masonry from 'react-masonry-css';
 import AddBudgetModal from './components/AddBudgetModal';
+import AddExpenseModal from './components/AddExpenseModal';
 import BudgetCard from './components/BudgetCard';
 import { useBudgets } from './contexts/BudgetsContext';
 import './css/style.min.css';
@@ -62,6 +63,7 @@ function App() {
         </section>
       </Container>
       <AddBudgetModal show={showAddBudgetModal} handleClose={() => setShowAddBudgetModal(false)} />
+      <AddExpenseModal show={showAddExpenseModal} handleClose={() => setShowAddExpenseModal(false)} />
     </>
   );
 }
