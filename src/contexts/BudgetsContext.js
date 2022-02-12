@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 import useLocalStorage from '../hooks/useLocalStorage';
 
@@ -25,6 +25,7 @@ export function useBudgets() {
 // }
 
 export const BudgetsProvider = ({ children }) => {
+  const currencyRef = useRef();
   const [budgets, setBudgets] = useLocalStorage('budgets', []);
   const [expenses, setExpenses] = useLocalStorage('expenses', []);
 
@@ -168,6 +169,7 @@ export const BudgetsProvider = ({ children }) => {
         deleteExpense,
         clearAllData,
         addDummyData,
+        currencyRef,
       }}>
       {children}
     </BudgetsContext.Provider>

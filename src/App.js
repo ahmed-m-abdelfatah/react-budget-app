@@ -1,20 +1,34 @@
-import { useState } from 'react';
-import { Container, Stack, Button } from 'react-bootstrap';
+import { useRef, useState } from 'react';
+import { Container, Stack, Button, Form } from 'react-bootstrap';
 import Masonry from 'react-masonry-css';
 import AddBudgetModal from './components/AddBudgetModal';
 import AddExpenseModal from './components/AddExpenseModal';
 import BudgetCard from './components/BudgetCard';
 import TotalBudgetCard from './components/TotalBudgetCard';
 import UncategorizedBudgetCard from './components/UncategorizedBudgetCard';
-import { useBudgets } from './contexts/BudgetsContext';
+import ViewExpensesModal from './components/ViewExpensesModal';
+import { UNCATEGORIZED_BUDGET_ID, useBudgets } from './contexts/BudgetsContext';
 import './css/style.min.css';
+import Currency from './currency-format.json';
+import { currentCurrency } from './utils';
+
+function convertObjectToArray(obj) {
+  let output = [];
+
+  for (let key in obj) {
+    // console.log({ key: key, name: obj[key].name });
+    output.push({ key: key, name: obj[key].name });
+  }
+
+  return output;
+}
 
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
   const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState();
-  const { budgets, getBudgetExpenses, clearAllData, addDummyData } = useBudgets();
+  const { budgets, getBudgetExpenses, clearAllData, addDummyData, currencyRef } = useBudgets();
 
   function openAddExpenseModal(budgetId) {
     setShowAddExpenseModal(true);
@@ -45,6 +59,13 @@ function App() {
           <Button variant='danger' className='text-capitalize' onClick={clearAllData}>
             clear all data
           </Button>
+          <Form.Select defaultValue={'USD'}>
+            {convertObjectToArray(Currency).map(el => (
+              <option key={el.key} value={el.key}>
+                {el.name}
+              </option>
+            ))}
+          </Form.Select>
         </Stack>
         <section className='cards'>
           {/* <div> */}
@@ -69,7 +90,7 @@ function App() {
           </Masonry>
           <UncategorizedBudgetCard
             onAddExpenseClick={() => openAddExpenseModal()}
-            onViewExpensesClick={() => setViewExpensesModalBudgetId()}
+            onViewExpensesClick={() => setViewExpensesModalBudgetId(UNCATEGORIZED_BUDGET_ID)}
           />
           <TotalBudgetCard />
           {/* </div> */}
@@ -85,6 +106,7 @@ function App() {
           defaultBudgetId={addExpenseModalBudgetId}
         />
       )}
+      <ViewExpensesModal budgetId={viewExpensesModalBudgetId} handleClose={() => setViewExpensesModalBudgetId()} />
     </>
   );
 }
