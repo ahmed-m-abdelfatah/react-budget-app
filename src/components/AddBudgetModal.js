@@ -9,11 +9,16 @@ export default function AddBudgetModal({ show, handleClose }) {
 
   function handleSubmit(e) {
     e.preventDefault(); // stop page loading
-    addBudget({
-      name: nameRef.current.value,
-      max: parseFloat(maxRef.current.value),
-    });
-    handleClose();
+    if (maxRef.current.value > 0) {
+      maxRef.current.style.cssText = '';
+      addBudget({
+        name: nameRef.current.value,
+        max: parseFloat(maxRef.current.value),
+      });
+      handleClose();
+    } else {
+      maxRef.current.style.cssText = 'border-color: red;box-shadow: 0 0 0 0.25rem rgb(255 0 0 / 25%);';
+    }
   }
 
   useEffect(() => {

@@ -40,13 +40,26 @@ export const BudgetsProvider = ({ children }) => {
 
   function addBudget({ name, max }) {
     setBudgets(prevBudgets => {
-      if (prevBudgets.find(budget => budget.name === name)) return prevBudgets;
+      if (prevBudgets.find(budget => budget.name === name)) {
+        const budgetIndex = prevBudgets.findIndex(budget => budget.name === name);
+        const budget = prevBudgets[budgetIndex];
+        const newBudget = { ...budget, max };
+        prevBudgets.splice(budgetIndex, 1, newBudget);
+
+        return [...prevBudgets]; // new array cuz reference vs value
+      }
       return [...prevBudgets, { id: uuidV4(), name, max }];
     });
   }
 
   function deleteBudget({ id }) {
-    //  TODO deal with expense
+    setExpenses(prevExpenses => {
+      return prevExpenses.map(expense => {
+        if (expense.budgetId !== id) return expense;
+        return { ...expense, budgetId: UNCATEGORIZED_BUDGET_ID };
+      });
+    });
+
     setBudgets(prevBudgets => prevBudgets.filter(budget => budget.id !== id));
   }
 
@@ -65,63 +78,50 @@ export const BudgetsProvider = ({ children }) => {
       {
         id: 'b50b2342-d189-491f-b6e8-ed4d80173de5',
         name: 'Entertainment',
-        max: 2000,
+        max: 120,
       },
       {
         id: 'd9b273b4-7d52-4327-8e26-5e9f30be6b08',
         name: 'Food',
-        max: 3500,
+        max: 130,
       },
       {
         id: 'b0f92e5e-ba62-4679-a61d-27a528b8c4a2',
         name: 'Car wash and oil change',
-        max: 1000,
+        max: 90,
       },
       {
         id: 'fbe69d54-2cab-43ee-95ec-94eb2897f2b2',
         name: 'Electronics',
-        max: 10000,
+        max: 210,
       },
       {
         id: '029a0bdf-569a-4ab0-87e9-cc891e3a59d0',
         name: 'Jewelry',
-        max: 7000,
+        max: 160,
       },
       {
         id: 'de44412e-f269-4327-a0d1-01ba37ccfd36',
         name: 'Clothes',
-        max: 4200,
+        max: 110,
       },
       {
         id: '97b3e371-bfe1-4e6c-8158-437d15c99f94',
         name: 'Learning courses',
-        max: 1000,
+        max: 140,
       },
       {
         id: 'b94458f9-5842-4867-ad66-5af61097a660',
         name: 'cat',
         max: 100,
       },
+      {
+        id: '3b9d8ddb-f247-4e2b-bb28-e621c316c8d5',
+        name: 'Delete Me',
+        max: 100,
+      },
     ]);
     setExpenses([
-      {
-        id: '13d0b7b8-996e-4a37-b82b-b7e73e70046a',
-        budgetId: 'b50b2342-d189-491f-b6e8-ed4d80173de5',
-        amount: 0,
-        description: 'netflix',
-      },
-      {
-        id: 'e2c29668-0b9c-4bf4-be5e-21604bd53e54',
-        budgetId: 'd9b273b4-7d52-4327-8e26-5e9f30be6b08',
-        amount: 0,
-        description: 'fruits',
-      },
-      {
-        id: 'b1ab8ec0-95eb-422b-9cbd-01657ac3c7d7',
-        budgetId: 'd9b273b4-7d52-4327-8e26-5e9f30be6b08',
-        amount: 0,
-        description: 'delivery',
-      },
       {
         id: 'e5f6e2cf-833e-4986-ac8e-e13d9db0136e',
         budgetId: 'de44412e-f269-4327-a0d1-01ba37ccfd36',
@@ -135,22 +135,76 @@ export const BudgetsProvider = ({ children }) => {
         description: 'udemy',
       },
       {
-        id: '759ceb30-0ccf-4bab-bad6-69a455e73a5e',
-        budgetId: '029a0bdf-569a-4ab0-87e9-cc891e3a59d0',
-        amount: 0,
-        description: 'necklaces',
-      },
-      {
-        id: 'f5eb5dd5-48ef-412f-8275-680eb286f521',
-        budgetId: 'b94458f9-5842-4867-ad66-5af61097a660',
-        amount: 0,
-        description: 'cat food and stuff',
-      },
-      {
         id: '8d14b84d-f6a9-4101-8db1-b9dd491e4b21',
         budgetId: 'Uncategorized',
         amount: 0,
         description: 'taxes',
+      },
+      {
+        id: 'bd4a350e-6308-4393-8e08-df45391e9ee0',
+        budgetId: 'b50b2342-d189-491f-b6e8-ed4d80173de5',
+        amount: 20,
+        description: 'Netflix',
+      },
+      {
+        id: 'a430b49a-99e7-47d5-ad22-8ea1cafc8b9e',
+        budgetId: 'b50b2342-d189-491f-b6e8-ed4d80173de5',
+        amount: 25,
+        description: 'Amazon Prime',
+      },
+      {
+        id: '1a838707-f40b-453b-8ff0-6bf51a3e38ab',
+        budgetId: 'd9b273b4-7d52-4327-8e26-5e9f30be6b08',
+        amount: 30,
+        description: 'Fruits',
+      },
+      {
+        id: 'cbdba68f-f560-4450-b978-2168fcb7d3eb',
+        budgetId: 'b0f92e5e-ba62-4679-a61d-27a528b8c4a2',
+        amount: 70,
+        description: 'oil change',
+      },
+      {
+        id: 'e5e2e610-003c-44a3-bbba-e9f8bb40eaac',
+        budgetId: 'de44412e-f269-4327-a0d1-01ba37ccfd36',
+        amount: 140,
+        description: 'zara',
+      },
+      {
+        id: '2409f137-7945-4500-ac6a-e326fdfbc12d',
+        budgetId: '029a0bdf-569a-4ab0-87e9-cc891e3a59d0',
+        amount: 100,
+        description: 'Ring',
+      },
+      {
+        id: '3d1e013e-2980-41ed-a64a-180f31f54ebe',
+        budgetId: 'b94458f9-5842-4867-ad66-5af61097a660',
+        amount: 40,
+        description: 'cat food',
+      },
+      {
+        id: 'fea31732-210b-42f8-972f-373445ab23c2',
+        budgetId: 'd9b273b4-7d52-4327-8e26-5e9f30be6b08',
+        amount: 40,
+        description: "McDonald's",
+      },
+      {
+        id: '94d5b932-0dd8-40cb-a8c2-ddd38f946595',
+        budgetId: 'fbe69d54-2cab-43ee-95ec-94eb2897f2b2',
+        amount: 100,
+        description: 'Repair iPhone',
+      },
+      {
+        id: '54be4ad2-a739-4c5a-b477-fdaf87b168ec',
+        budgetId: '97b3e371-bfe1-4e6c-8158-437d15c99f94',
+        amount: 60,
+        description: 'React',
+      },
+      {
+        id: 'e0083069-8a6e-4891-a971-c65d10aa7abe',
+        budgetId: 'Uncategorized',
+        amount: 280,
+        description: 'Taxes',
       },
     ]);
   }

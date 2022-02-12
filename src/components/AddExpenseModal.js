@@ -10,12 +10,17 @@ export default function AddExpenseModal({ show, handleClose, defaultBudgetId }) 
 
   function handleSubmit(e) {
     e.preventDefault(); // stop page loading
-    addExpense({
-      description: descriptionRef.current.value,
-      amount: parseFloat(amountRef.current.value),
-      budgetId: budgetIdRef.current.value,
-    });
-    handleClose();
+    if (amountRef.current.value > 0) {
+      amountRef.current.style.cssText = '';
+      addExpense({
+        description: descriptionRef.current.value,
+        amount: parseFloat(amountRef.current.value),
+        budgetId: budgetIdRef.current.value,
+      });
+      handleClose();
+    } else {
+      amountRef.current.style.cssText = 'border-color: red;box-shadow: 0 0 0 0.25rem rgb(255 0 0 / 25%);';
+    }
   }
 
   useEffect(() => {
