@@ -1,41 +1,27 @@
-import { useEffect, useRef, useState } from 'react';
-import { Container, Stack, Button, Form } from 'react-bootstrap';
+import { useState } from 'react';
+import { Container } from 'react-bootstrap';
 import Masonry from 'react-masonry-css';
 import AddBudgetModal from './components/AddBudgetModal';
 import AddExpenseModal from './components/AddExpenseModal';
 import BudgetCard from './components/BudgetCard';
+import Header from './components/Header';
 import TotalBudgetCard from './components/TotalBudgetCard';
 import UncategorizedBudgetCard from './components/UncategorizedBudgetCard';
 import ViewExpensesModal from './components/ViewExpensesModal';
-import { UNCATEGORIZED_BUDGET_ID, useBudgets } from './contexts/BudgetsContext';
+import { currentCurrencyLogo, UNCATEGORIZED_BUDGET_ID, useBudgets } from './contexts/BudgetsContext';
 import './css/style.min.css';
-import Currency from './currency-format.json';
-
-function convertObjectToArray(obj) {
-  let output = [];
-
-  for (let key in obj) {
-    output.push({ key: key, name: obj[key].name });
-  }
-
-  return output;
-}
 
 function App() {
-  const currencyRef = useRef();
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
   const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState();
-  const { budgets, getBudgetExpenses, clearAllData, addDummyData, currentCurrency, changeCurrentCurrency } =
-    useBudgets();
+  const { budgets, getBudgetExpenses } = useBudgets();
 
   function openAddExpenseModal(budgetId) {
     setShowAddExpenseModal(true);
     setAddExpenseModalBudgetId(budgetId);
   }
-
-  useEffect(() => {}, [currentCurrency]);
 
   const breakpointColumnsObj = {
     default: 4,
@@ -47,31 +33,7 @@ function App() {
   return (
     <>
       <Container className='my-4'>
-        <Stack direction='horizontal' gap='2' className='mb-4 text-capitalize flex-wrap justify-content-end'>
-          <h1 className='me-auto'>budgets</h1>
-          <Button variant='outline-secondary' className='text-capitalize' onClick={addDummyData}>
-            add dummy data
-          </Button>
-          <Button variant='primary' className='text-capitalize' onClick={() => setShowAddBudgetModal(true)}>
-            add budget
-          </Button>
-          <Button variant='outline-primary' className='text-capitalize' onClick={openAddExpenseModal}>
-            add expense
-          </Button>
-          <Button variant='danger' className='text-capitalize' onClick={clearAllData}>
-            clear all data
-          </Button>
-          <Form.Select
-            defaultValue={currentCurrency}
-            ref={currencyRef}
-            onChange={() => changeCurrentCurrency(currencyRef.current.value)}>
-            {convertObjectToArray(Currency).map(el => (
-              <option key={el.key} value={el.key}>
-                {el.name}
-              </option>
-            ))}
-          </Form.Select>
-        </Stack>
+        <Header setShowAddBudgetModal={() => setShowAddBudgetModal(true)} openAddExpenseModal={openAddExpenseModal} />
         <section className='cards'>
           {/* <div> */}
           <Masonry
