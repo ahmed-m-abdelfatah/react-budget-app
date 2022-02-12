@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Container, Stack, Button, Form } from 'react-bootstrap';
 import Masonry from 'react-masonry-css';
 import AddBudgetModal from './components/AddBudgetModal';
@@ -35,6 +35,10 @@ function App() {
     setShowAddExpenseModal(true);
     setAddExpenseModalBudgetId(budgetId);
   }
+
+  useEffect(() => {
+    console.log('object');
+  }, [currentCurrency]);
 
   const breakpointColumnsObj = {
     default: 4,
