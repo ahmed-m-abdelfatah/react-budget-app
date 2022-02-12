@@ -7,7 +7,6 @@ export default function AddExpenseModal({ show, handleClose, defaultBudgetId }) 
   const amountRef = useRef();
   const budgetIdRef = useRef();
   const { addExpense, budgets } = useBudgets();
-  // console.log('🚀 ~ file: AddExpenseModal.js ~ line 10 ~ AddExpenseModal ~ addExpense', useBudgets());
 
   function handleSubmit(e) {
     e.preventDefault(); // stop page loading

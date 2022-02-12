@@ -6,7 +6,7 @@ import AddExpenseModal from './components/AddExpenseModal';
 import BudgetCard from './components/BudgetCard';
 import TotalBudgetCard from './components/TotalBudgetCard';
 import UncategorizedBudgetCard from './components/UncategorizedBudgetCard';
-import { UNCATEGORIZED_BUDGET_ID, useBudgets } from './contexts/BudgetsContext';
+import { useBudgets } from './contexts/BudgetsContext';
 import './css/style.min.css';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
   const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState();
-  const { budgets, getBudgetExpenses } = useBudgets();
+  const { budgets, getBudgetExpenses, clearAllData, addDummyData } = useBudgets();
 
   function openAddExpenseModal(budgetId) {
     setShowAddExpenseModal(true);
@@ -33,11 +33,17 @@ function App() {
       <Container className='my-4'>
         <Stack direction='horizontal' gap='2' className='mb-4 text-capitalize flex-wrap justify-content-end'>
           <h1 className='me-auto'>budgets</h1>
+          <Button variant='outline-secondary' className='text-capitalize' onClick={addDummyData}>
+            add dummy data
+          </Button>
           <Button variant='primary' className='text-capitalize' onClick={() => setShowAddBudgetModal(true)}>
             add budget
           </Button>
           <Button variant='outline-primary' className='text-capitalize' onClick={openAddExpenseModal}>
             add expense
+          </Button>
+          <Button variant='danger' className='text-capitalize' onClick={clearAllData}>
+            clear all data
           </Button>
         </Stack>
         <section className='cards'>
@@ -60,9 +66,9 @@ function App() {
                 />
               );
             })}
-            <UncategorizedBudgetCard />
-            <TotalBudgetCard />
           </Masonry>
+          <UncategorizedBudgetCard />
+          <TotalBudgetCard />
           {/* </div> */}
         </section>
       </Container>
