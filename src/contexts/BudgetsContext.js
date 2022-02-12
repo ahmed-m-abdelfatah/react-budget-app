@@ -123,24 +123,6 @@ export const BudgetsProvider = ({ children }) => {
     ]);
     setExpenses([
       {
-        id: 'e5f6e2cf-833e-4986-ac8e-e13d9db0136e',
-        budgetId: 'de44412e-f269-4327-a0d1-01ba37ccfd36',
-        amount: 0,
-        description: 'winter clothes',
-      },
-      {
-        id: 'de2298fc-f37f-4a08-b3b3-f8f4e57c80da',
-        budgetId: '97b3e371-bfe1-4e6c-8158-437d15c99f94',
-        amount: 0,
-        description: 'udemy',
-      },
-      {
-        id: '8d14b84d-f6a9-4101-8db1-b9dd491e4b21',
-        budgetId: 'Uncategorized',
-        amount: 0,
-        description: 'taxes',
-      },
-      {
         id: 'bd4a350e-6308-4393-8e08-df45391e9ee0',
         budgetId: 'b50b2342-d189-491f-b6e8-ed4d80173de5',
         amount: 20,
