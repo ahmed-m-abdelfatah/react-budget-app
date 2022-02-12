@@ -58,6 +58,7 @@ export const BudgetsProvider = ({ children }) => {
   function clearAllData() {
     setBudgets([]);
     setExpenses([]);
+    setCurrentCurrency('USD');
     localStorage.clear();
   }
 
@@ -155,6 +156,7 @@ export const BudgetsProvider = ({ children }) => {
         description: 'taxes',
       },
     ]);
+    setCurrentCurrency('USD');
   }
 
   function changeCurrentCurrency(newValue) {

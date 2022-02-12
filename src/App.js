@@ -15,7 +15,6 @@ function convertObjectToArray(obj) {
   let output = [];
 
   for (let key in obj) {
-    // console.log({ key: key, name: obj[key].name });
     output.push({ key: key, name: obj[key].name });
   }
 
@@ -36,9 +35,7 @@ function App() {
     setAddExpenseModalBudgetId(budgetId);
   }
 
-  useEffect(() => {
-    console.log('object');
-  }, [currentCurrency]);
+  useEffect(() => {}, [currentCurrency]);
 
   const breakpointColumnsObj = {
     default: 4,

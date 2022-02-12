@@ -17,7 +17,6 @@ export default function AddBudgetModal({ show, handleClose }) {
   }
 
   useEffect(() => {
-    // console.log(nameRef);
     nameRef.current.focus();
   }, []);
 
