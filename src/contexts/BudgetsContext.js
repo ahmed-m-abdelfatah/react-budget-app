@@ -116,8 +116,13 @@ export const BudgetsProvider = ({ children }) => {
         max: 100,
       },
       {
-        id: '3b9d8ddb-f247-4e2b-bb28-e621c316c8d5',
-        name: 'Delete Me',
+        id: 'e262c3a6-6696-41a3-8e27-aab2b5bdeec9',
+        name: 'Delete Me v1',
+        max: 100,
+      },
+      {
+        id: '45872c43-e551-49ed-a301-d1b2bf169bf0',
+        name: 'Delete Me v2',
         max: 100,
       },
     ]);
@@ -187,6 +192,12 @@ export const BudgetsProvider = ({ children }) => {
         budgetId: 'Uncategorized',
         amount: 280,
         description: 'Taxes',
+      },
+      {
+        id: 'dd006e0d-a241-4e18-9c9e-482d9513ee03',
+        budgetId: '45872c43-e551-49ed-a301-d1b2bf169bf0',
+        amount: 100,
+        description: 'Delete Me v2',
       },
     ]);
   }
