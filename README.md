@@ -8,3 +8,4 @@
 - https://youtube.com/playlist?list=PLZlA0Gpn_vH-aEDXnaFNLsqiJWFpIWV03
 - https://youtube.com/playlist?list=PL1FWK-sgJ9elLBrEyAXK74pM37lJtDzut
 - https://youtu.be/kMQ2A27yUqU
+- https://youtu.be/F2dIgixMePE

@@ -4,14 +4,16 @@ import Masonry from 'react-masonry-css';
 import AddBudgetModal from './components/AddBudgetModal';
 import AddExpenseModal from './components/AddExpenseModal';
 import BudgetCard from './components/BudgetCard';
-import { useBudgets } from './contexts/BudgetsContext';
+import TotalBudgetCard from './components/TotalBudgetCard';
+import UncategorizedBudgetCard from './components/UncategorizedBudgetCard';
+import { UNCATEGORIZED_BUDGET_ID, useBudgets } from './contexts/BudgetsContext';
 import './css/style.min.css';
 
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
-  const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState();
   const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
+  const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState();
   const { budgets, getBudgetExpenses } = useBudgets();
 
   function openAddExpenseModal(budgetId) {
@@ -58,12 +60,18 @@ function App() {
                 />
               );
             })}
+            <UncategorizedBudgetCard />
+            <TotalBudgetCard />
           </Masonry>
           {/* </div> */}
         </section>
       </Container>
       <AddBudgetModal show={showAddBudgetModal} handleClose={() => setShowAddBudgetModal(false)} />
-      <AddExpenseModal show={showAddExpenseModal} handleClose={() => setShowAddExpenseModal(false)} />
+      <AddExpenseModal
+        show={showAddExpenseModal}
+        handleClose={() => setShowAddExpenseModal(false)}
+        defaultBudgetId={addExpenseModalBudgetId}
+      />
     </>
   );
 }
