@@ -1,2 +1,2 @@
-.my-masonry-grid{display:-webkit-box;display:-ms-flexbox;display:flex;margin-left:-15px;width:auto}.my-masonry-grid .my-masonry-grid_column{padding-left:15px;background-clip:padding-box}.my-masonry-grid .my-masonry-grid_column>div{margin-bottom:15px}
+.cards>div:not(:first-child){margin-bottom:0.9375rem !important}.my-masonry-grid{display:-webkit-box;display:-ms-flexbox;display:flex;margin-left:-.9375rem;width:auto}.my-masonry-grid .my-masonry-grid_column{padding-left:.9375rem;background-clip:padding-box}.my-masonry-grid .my-masonry-grid_column>div{margin-bottom:.9375rem}
 /*# sourceMappingURL=style.min.css.map */
