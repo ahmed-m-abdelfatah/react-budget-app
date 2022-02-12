@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 import useLocalStorage from '../hooks/useLocalStorage';
 
@@ -25,9 +25,9 @@ export function useBudgets() {
 // }
 
 export const BudgetsProvider = ({ children }) => {
-  const currencyRef = useRef();
   const [budgets, setBudgets] = useLocalStorage('budgets', []);
   const [expenses, setExpenses] = useLocalStorage('expenses', []);
+  const [currentCurrency, setCurrentCurrency] = useLocalStorage('currentCurrency', 'USD');
 
   function getBudgetExpenses(budgetId) {
     return expenses.filter(expense => expense.budgetId === budgetId);
@@ -157,6 +157,10 @@ export const BudgetsProvider = ({ children }) => {
     ]);
   }
 
+  function changeCurrentCurrency(newValue) {
+    setCurrentCurrency(newValue);
+  }
+
   return (
     <BudgetsContext.Provider
       value={{
@@ -169,7 +173,8 @@ export const BudgetsProvider = ({ children }) => {
         deleteExpense,
         clearAllData,
         addDummyData,
-        currencyRef,
+        currentCurrency,
+        changeCurrentCurrency,
       }}>
       {children}
     </BudgetsContext.Provider>

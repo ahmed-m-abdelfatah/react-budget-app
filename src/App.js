@@ -10,7 +10,6 @@ import ViewExpensesModal from './components/ViewExpensesModal';
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from './contexts/BudgetsContext';
 import './css/style.min.css';
 import Currency from './currency-format.json';
-import { currentCurrency } from './utils';
 
 function convertObjectToArray(obj) {
   let output = [];
@@ -24,11 +23,13 @@ function convertObjectToArray(obj) {
 }
 
 function App() {
+  const currencyRef = useRef();
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
   const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState();
-  const { budgets, getBudgetExpenses, clearAllData, addDummyData, currencyRef } = useBudgets();
+  const { budgets, getBudgetExpenses, clearAllData, addDummyData, currentCurrency, changeCurrentCurrency } =
+    useBudgets();
 
   function openAddExpenseModal(budgetId) {
     setShowAddExpenseModal(true);
@@ -59,7 +60,10 @@ function App() {
           <Button variant='danger' className='text-capitalize' onClick={clearAllData}>
             clear all data
           </Button>
-          <Form.Select defaultValue={'USD'}>
+          <Form.Select
+            defaultValue={currentCurrency}
+            ref={currencyRef}
+            onChange={() => changeCurrentCurrency(currencyRef.current.value)}>
             {convertObjectToArray(Currency).map(el => (
               <option key={el.key} value={el.key}>
                 {el.name}
