@@ -1,5 +1,5 @@
 import { Form, Modal, Button } from 'react-bootstrap';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useBudgets } from '../contexts/BudgetsContext';
 
 export default function AddBudgetModal({ show, handleClose }) {
@@ -16,6 +16,11 @@ export default function AddBudgetModal({ show, handleClose }) {
     handleClose();
   }
 
+  useEffect(() => {
+    // console.log(nameRef);
+    nameRef.current.focus();
+  }, []);
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Form onSubmit={handleSubmit}>
@@ -25,11 +30,11 @@ export default function AddBudgetModal({ show, handleClose }) {
         <Modal.Body>
           <Form.Group className='mb-3' controlId='name'>
             <Form.Label>Name</Form.Label>
-            <Form.Control ref={nameRef} type='text' required />
+            <Form.Control ref={nameRef} type='text' required autoComplete='off' />
           </Form.Group>
           <Form.Group className='mb-3' controlId='max'>
             <Form.Label>Maximum Spending</Form.Label>
-            <Form.Control ref={maxRef} type='number' required min={0} step={0.01} />
+            <Form.Control ref={maxRef} type='number' required min={0} step={0.01} autoComplete='off' />
           </Form.Group>
           <div className='d-flex justify-content-end'>
             <Button variant='primary' type='submit'>

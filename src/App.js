@@ -67,17 +67,24 @@ function App() {
               );
             })}
           </Masonry>
-          <UncategorizedBudgetCard />
+          <UncategorizedBudgetCard
+            onAddExpenseClick={() => openAddExpenseModal()}
+            onViewExpensesClick={() => setViewExpensesModalBudgetId()}
+          />
           <TotalBudgetCard />
           {/* </div> */}
         </section>
       </Container>
-      <AddBudgetModal show={showAddBudgetModal} handleClose={() => setShowAddBudgetModal(false)} />
-      <AddExpenseModal
-        show={showAddExpenseModal}
-        handleClose={() => setShowAddExpenseModal(false)}
-        defaultBudgetId={addExpenseModalBudgetId}
-      />
+      {showAddBudgetModal && (
+        <AddBudgetModal show={showAddBudgetModal} handleClose={() => setShowAddBudgetModal(false)} />
+      )}
+      {showAddExpenseModal && (
+        <AddExpenseModal
+          show={showAddExpenseModal}
+          handleClose={() => setShowAddExpenseModal(false)}
+          defaultBudgetId={addExpenseModalBudgetId}
+        />
+      )}
     </>
   );
 }
