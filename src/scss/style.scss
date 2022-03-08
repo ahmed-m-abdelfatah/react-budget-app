@@ -1,0 +1,31 @@
+// .cards > div {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+//   @supports (grid-template-rows: masonry) {
+//     /* masonry code here */
+//     grid-template-rows: masonry;
+//     grid-template-columns: masonry;
+//   }
+//   gap: 16px;
+//   align-items: flex-start;
+// }
+
+.cards > div:not(:first-child) {
+  margin-bottom: 0.9375rem !important;
+}
+
+.my-masonry-grid {
+  $gutter: 0.9375rem;
+  display: flex;
+  margin-left: -$gutter;
+  width: auto;
+
+  .my-masonry-grid_column {
+    padding-left: $gutter;
+    background-clip: padding-box;
+
+    & > div {
+      margin-bottom: $gutter;
+    }
+  }
+}
